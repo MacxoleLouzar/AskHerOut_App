@@ -1,0 +1,99 @@
+import React from 'react';
+import { Utensils, Coffee, Gamepad2, Film, Sparkles, CheckCircle2 } from 'lucide-react';
+import ClassyButton from './ClassyButton';
+
+const DATE_OPTIONS = [
+  {
+    id: 'dinner', title: 'Dinner Date', description: 'Romantic food & candlelight vibes',
+    icon: Utensils, emoji: '🍽️',
+    border: '#fda4af', iconColor: '#e11d48', glow: 'rgba(225,29,72,0.25)',
+  },
+  {
+    id: 'coffee', title: 'Coffee Date', description: 'Cozy chats & cute pastries',
+    icon: Coffee, emoji: '☕',
+    border: '#fdba74', iconColor: '#ea580c', glow: 'rgba(234,88,12,0.25)',
+  },
+  {
+    id: 'game', title: 'Game Date', description: 'Arcade, board games & laughs',
+    icon: Gamepad2, emoji: '🎮',
+    border: '#c4b5fd', iconColor: '#7c3aed', glow: 'rgba(124,58,237,0.25)',
+  },
+  {
+    id: 'movie', title: 'Movie Date', description: 'Popcorn & a great film together',
+    icon: Film, emoji: '🎬',
+    border: '#93c5fd', iconColor: '#2563eb', glow: 'rgba(37,99,235,0.25)',
+  },
+];
+
+export default function DateTypeSelector({ selectedType, onSelect, onNext }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div className="flex items-center justify-center gap-2" style={{ color: '#c0395a' }}>
+        <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+        <span className="font-black uppercase tracking-widest text-xs">Step 1 of 2</span>
+      </div>
+
+      <div>
+        <h2
+          className="text-2xl sm:text-3xl font-black mb-2"
+          style={{ fontFamily: 'Playfair Display, serif', color: '#7a1535' }}
+        >
+          Choose Our Vibe 🌸
+        </h2>
+        <p className="text-xs sm:text-sm" style={{ color: '#b07090' }}>
+          What kind of date sounds perfect?
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-5 sm:gap-7">
+        {DATE_OPTIONS.map((opt) => {
+          const Icon = opt.icon;
+          const isSelected = selectedType?.id === opt.id;
+          return (
+            <div
+              key={opt.id}
+              onClick={() => onSelect(opt)}
+              className="relative p-3 sm:p-5 rounded-xl sm:rounded-2xl text-left cursor-pointer flex flex-col gap-2 sm:gap-3 transition-all duration-200 hover:-translate-y-1 hover:scale-105 active:scale-95"
+              style={{
+                background: isSelected
+                  ? 'linear-gradient(135deg, #fde8e8f8 0%, #fcd5cef8 50%, #f9b8c4f8 100%)'
+                  : 'linear-gradient(135deg, #fde8e8cc 0%, #fcd5cecc 50%, #f9b8c4cc 100%)',
+                backdropFilter: 'blur(8px)',
+                border: `2px solid ${isSelected ? opt.iconColor : opt.border}`,
+                boxShadow: isSelected
+                  ? `0 8px 28px ${opt.glow}, 0 0 0 3px ${opt.border}`
+                  : `0 2px 10px ${opt.glow}`,
+                transform: isSelected ? 'scale(1.04) translateY(-2px)' : undefined,
+              }}
+            >
+              <div className="flex items-center justify-between">
+                <div
+                  className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center text-white shadow-md"
+                  style={{ background: opt.iconColor }}
+                >
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                {isSelected && <CheckCircle2 className="w-4 h-4 sm:w-6 sm:h-6" style={{ color: opt.iconColor }} />}
+              </div>
+              <div>
+                <h3
+                  className="font-black text-xs sm:text-base leading-tight"
+                  style={{ color: '#4a1020', fontFamily: 'Playfair Display, serif' }}
+                >
+                  {opt.emoji} {opt.title}
+                </h3>
+                <p className="text-[10px] sm:text-xs mt-0.5 sm:mt-1 leading-snug" style={{ color: '#9d6070' }}>
+                  {opt.description}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <ClassyButton onClick={onNext} disabled={!selectedType}>
+        Continue →
+      </ClassyButton>
+    </div>
+  );
+}

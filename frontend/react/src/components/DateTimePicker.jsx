@@ -47,7 +47,12 @@ export default function DateTimePicker({
     return new Date(dateStr + 'T00:00:00').getDay() === 0;
   };
 
-  const isValid = selectedDate && (!isEvent || (eventDetails?.place?.trim())) && (!isChurch || isSunday(selectedDate));
+  const isPast = (dateStr) => {
+    if (!dateStr) return false;
+    return new Date(dateStr + 'T00:00:00') < new Date(minDate + 'T00:00:00');
+  };
+
+  const isValid = selectedDate && !isPast(selectedDate) && (!isEvent || (eventDetails?.place?.trim())) && (!isChurch || isSunday(selectedDate));
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', textAlign: 'center' }}>
@@ -83,9 +88,19 @@ export default function DateTimePicker({
             max={maxDate}
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            style={inputStyle}
+            style={{
+              ...inputStyle,
+              border: selectedDate && isPast(selectedDate)
+                ? '2px solid #e11d48'
+                : '2px solid rgba(255,182,193,0.7)',
+            }}
           />
-          {isChurch && selectedDate && !isSunday(selectedDate) && (
+          {selectedDate && isPast(selectedDate) && (
+            <span style={{ color: '#e11d48', fontSize: '0.78rem', fontWeight: 600 }}>
+              ⚠️ You can't pick a date in the past
+            </span>
+          )}
+          {isChurch && selectedDate && !isPast(selectedDate) && !isSunday(selectedDate) && (
             <span style={{ color: '#7c3aed', fontSize: '0.78rem', fontWeight: 600 }}>
               ⛪ Church dates must be on a Sunday
             </span>

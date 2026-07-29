@@ -15,7 +15,7 @@ const otherMessages = [
   (n) => <>Honestly {n}, you saying yes is already the best part of my day 💕<br />Now let's make the actual date even better! ✨</>,
 ];
 
-export default function ConfirmationCard({ selectedDateType, selectedDate, selectedTime, name }) {
+export default function ConfirmationCard({ selectedDateType, selectedDate, selectedTime, name, eventDetails }) {
   const msgIndex = React.useRef(Math.floor(Math.random() * (isThuli(name) ? thuliMessages.length : otherMessages.length))).current;
   const message = isThuli(name) ? thuliMessages[msgIndex] : otherMessages[msgIndex](name);
   const Icon = selectedDateType?.icon;
@@ -130,6 +130,65 @@ export default function ConfirmationCard({ selectedDateType, selectedDate, selec
             </span>
           </div>
         </div>
+
+        {/* Event details rows */}
+        {eventDetails?.place && (
+          <>
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255,182,193,0.5)', margin: 0 }} />
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+              <div style={{
+                width: '48px', height: '48px', borderRadius: '14px', flexShrink: 0,
+                background: 'linear-gradient(135deg, #e8527a, #c0395a)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(192,57,90,0.3)',
+              }}>
+                <span style={{ fontSize: '20px' }}>📍</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '0.65rem', fontWeight: 900, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#c0395a' }}>Venue</span>
+                <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)', fontWeight: 700, color: '#4a1020' }}>{eventDetails.place}</span>
+              </div>
+            </div>
+          </>
+        )}
+        {eventDetails?.ticketPrice && (
+          <>
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255,182,193,0.5)', margin: 0 }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{
+                width: '48px', height: '48px', borderRadius: '14px', flexShrink: 0,
+                background: 'linear-gradient(135deg, #e8527a, #c0395a)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(192,57,90,0.3)',
+              }}>
+                <span style={{ fontSize: '20px' }}>🎟️</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '0.65rem', fontWeight: 900, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#c0395a' }}>Tickets</span>
+                <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)', fontWeight: 700, color: '#4a1020' }}>{eventDetails.ticketPrice}</span>
+              </div>
+            </div>
+          </>
+        )}
+        {eventDetails?.notes && (
+          <>
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255,182,193,0.5)', margin: 0 }} />
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+              <div style={{
+                width: '48px', height: '48px', borderRadius: '14px', flexShrink: 0,
+                background: 'linear-gradient(135deg, #e8527a, #c0395a)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(192,57,90,0.3)',
+              }}>
+                <span style={{ fontSize: '20px' }}>✨</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '0.65rem', fontWeight: 900, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#c0395a' }}>Details</span>
+                <span style={{ fontFamily: 'Lato, sans-serif', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: '#4a1020', lineHeight: 1.5 }}>{eventDetails.notes}</span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Footer */}

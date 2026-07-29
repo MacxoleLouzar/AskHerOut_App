@@ -14,6 +14,7 @@ export default function DateAppPage() {
   const [selectedDateType, setSelectedDateType] = useState(null);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('18:00');
+  const [eventDetails, setEventDetails] = useState({ place: '', ticketPrice: '', notes: '' });
 
   const handleSubmitDate = () => {
     setStep('confirmed');
@@ -22,6 +23,7 @@ export default function DateAppPage() {
       dateType: selectedDateType?.title,
       date: selectedDate,
       time: selectedTime,
+      ...(selectedDateType?.isEvent && { eventDetails }),
     }).catch((err) => console.error('Save failed:', err));
   };
 
@@ -71,6 +73,10 @@ export default function DateAppPage() {
               setSelectedDate={setSelectedDate}
               selectedTime={selectedTime}
               setSelectedTime={setSelectedTime}
+              isEvent={selectedDateType?.isEvent}
+              selectedDateType={selectedDateType}
+              eventDetails={eventDetails}
+              setEventDetails={setEventDetails}
               onBack={() => setStep('selectDateType')}
               onSubmit={handleSubmitDate}
             />
@@ -81,6 +87,7 @@ export default function DateAppPage() {
               selectedDate={selectedDate}
               selectedTime={selectedTime}
               name={name}
+              eventDetails={selectedDateType?.isEvent ? eventDetails : null}
             />
           )}
         </div>

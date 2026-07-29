@@ -1,5 +1,5 @@
 import React from 'react';
-import { Utensils, Coffee, Gamepad2, Film, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Utensils, Coffee, Gamepad2, Film, Sparkles, CheckCircle2, Flame, Church, Ticket, Fish } from 'lucide-react';
 import ClassyButton from './ClassyButton';
 
 const DATE_OPTIONS = [
@@ -14,14 +14,35 @@ const DATE_OPTIONS = [
     border: '#fdba74', iconColor: '#ea580c', glow: 'rgba(234,88,12,0.25)',
   },
   {
+    id: 'sushi', title: 'Sushi Date', description: 'Fresh rolls & good vibes',
+    icon: Fish, emoji: '🍣',
+    border: '#6ee7b7', iconColor: '#059669', glow: 'rgba(5,150,105,0.25)',
+  },
+  {
+    id: 'braai', title: 'Braai Date', description: 'Fire, food & good company',
+    icon: Flame, emoji: '🔥',
+    border: '#fca5a5', iconColor: '#dc2626', glow: 'rgba(220,38,38,0.25)',
+  },
+  {
+    id: 'church', title: 'Church Date', description: 'Worship together in faith',
+    icon: Church, emoji: '⛪',
+    border: '#c4b5fd', iconColor: '#7c3aed', glow: 'rgba(124,58,237,0.25)',
+  },
+  {
     id: 'game', title: 'Game Date', description: 'Arcade, board games & laughs',
     icon: Gamepad2, emoji: '🎮',
-    border: '#c4b5fd', iconColor: '#7c3aed', glow: 'rgba(124,58,237,0.25)',
+    border: '#a5b4fc', iconColor: '#4f46e5', glow: 'rgba(79,70,229,0.25)',
   },
   {
     id: 'movie', title: 'Movie Date', description: 'Popcorn & a great film together',
     icon: Film, emoji: '🎬',
     border: '#93c5fd', iconColor: '#2563eb', glow: 'rgba(37,99,235,0.25)',
+  },
+  {
+    id: 'event', title: 'Event Date', description: 'Concert, show or special event',
+    icon: Ticket, emoji: '🎟️',
+    border: '#f9a8d4', iconColor: '#db2777', glow: 'rgba(219,39,119,0.25)',
+    isEvent: true,
   },
 ];
 

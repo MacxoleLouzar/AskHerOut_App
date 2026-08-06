@@ -1,5 +1,5 @@
-import React from 'react';
-import { Utensils, Coffee, Gamepad2, Film, Sparkles, CheckCircle2, Flame, Church, Ticket, Fish } from 'lucide-react';
+import React, { useState } from 'react';
+import { Utensils, Coffee, Gamepad2, Film, Sparkles, CheckCircle2, Flame, Church, Ticket, Fish, MoreHorizontal } from 'lucide-react';
 import ClassyButton from './ClassyButton';
 
 const DATE_OPTIONS = [
@@ -44,9 +44,33 @@ const DATE_OPTIONS = [
     border: '#f9a8d4', iconColor: '#db2777', glow: 'rgba(219,39,119,0.25)',
     isEvent: true,
   },
+  {
+    id: 'other', title: 'Other', description: 'Sleepover, painting & more...',
+    icon: MoreHorizontal, emoji: '✨',
+    border: '#d4b896', iconColor: '#92400e', glow: 'rgba(146,64,14,0.25)',
+    isOther: true,
+  },
 ];
 
 export default function DateTypeSelector({ selectedType, onSelect, onNext }) {
+  const [customTitle, setCustomTitle] = useState('');
+
+  const handleSelect = (opt) => {
+    if (opt.isOther) {
+      onSelect({ ...opt, title: customTitle.trim() || 'Other' });
+    } else {
+      onSelect(opt);
+    }
+  };
+
+  const handleCustomChange = (e) => {
+    setCustomTitle(e.target.value);
+    if (selectedType?.isOther) {
+      onSelect({ ...selectedType, title: e.target.value.trim() || 'Other' });
+    }
+  };
+
+  const isOtherSelected = selectedType?.isOther;
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div className="flex items-center justify-center gap-2" style={{ color: '#c0395a' }}>
@@ -73,7 +97,7 @@ export default function DateTypeSelector({ selectedType, onSelect, onNext }) {
           return (
             <div
               key={opt.id}
-              onClick={() => onSelect(opt)}
+              onClick={() => handleSelect(opt)}
               className="relative p-3 sm:p-5 rounded-xl sm:rounded-2xl text-left cursor-pointer flex flex-col gap-2 sm:gap-3 transition-all duration-200 hover:-translate-y-1 hover:scale-105 active:scale-95"
               style={{
                 background: isSelected
@@ -112,7 +136,38 @@ export default function DateTypeSelector({ selectedType, onSelect, onNext }) {
         })}
       </div>
 
-      <ClassyButton onClick={onNext} disabled={!selectedType}>
+      {/* Custom input for Other */}
+      {isOtherSelected && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', textAlign: 'left' }}>
+          <label style={{
+            fontSize: '0.7rem', fontWeight: 900, letterSpacing: '0.18em',
+            textTransform: 'uppercase', color: '#92400e',
+          }}>
+            ✨ Describe your date idea
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. Sleepover, Painting class, Hiking..."
+            value={customTitle}
+            onChange={handleCustomChange}
+            style={{
+              width: '100%',
+              padding: '14px 18px',
+              borderRadius: '16px',
+              fontFamily: 'Lato, sans-serif',
+              fontWeight: 700,
+              fontSize: '1rem',
+              color: '#7a1535',
+              background: 'rgba(255,228,235,0.8)',
+              border: '2px solid #d4b896',
+              outline: 'none',
+              boxSizing: 'border-box',
+            }}
+          />
+        </div>
+      )}
+
+      <ClassyButton onClick={onNext} disabled={!selectedType || (isOtherSelected && !customTitle.trim())}>
         Continue →
       </ClassyButton>
     </div>

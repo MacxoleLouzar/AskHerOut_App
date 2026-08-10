@@ -11,7 +11,7 @@ app.use('/api/v1/dates', dateRoutes)
 
 app.get('/', (req, res) => {
   res.json({
-    message:"Thuli's Date App API is live! 💕"});
+    message:"Date App API is live! 💕"});
 });
 
 export default app;

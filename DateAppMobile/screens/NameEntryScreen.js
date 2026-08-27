@@ -49,10 +49,10 @@ export default function NameEntryScreen({ onSubmit }) {
             </View>
 
             <View style={styles.fieldGroup}>
-              <Text style={styles.label}>Her Name (Recipient)</Text>
+              <Text style={styles.label}>Their Name (Recipient)</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Her name..."
+                placeholder="Their name..."
                 placeholderTextColor={COLORS.roseLight}
                 value={recipientName}
                 onChangeText={setRecipientName}
@@ -69,7 +69,7 @@ export default function NameEntryScreen({ onSubmit }) {
                 onChangeText={setPhone}
                 keyboardType="phone-pad"
               />
-              <Text style={styles.hint}>She'll send her confirmation here 💕</Text>
+              <Text style={styles.hint}>They'll send their confirmation here 💕</Text>
             </View>
 
             <ClassyButton onPress={() => isValid && onSubmit({ senderName: senderName.trim(), recipientName: recipientName.trim(), phone: phone.trim() })} disabled={!isValid}>

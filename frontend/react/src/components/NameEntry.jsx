@@ -93,11 +93,11 @@ export default function NameEntry({ onSubmit }) {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', textAlign: 'left' }}>
           <label style={{ fontSize: '0.65rem', fontWeight: 900, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#9d4a6a', paddingLeft: '8px' }}>
-            Her Name (Recipient)
+            Their Name (Recipient)
           </label>
           <input
             type="text"
-            placeholder="Her name..."
+            placeholder="Their name..."
             value={recipientName}
             onChange={(e) => setRecipientName(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
@@ -120,7 +120,7 @@ export default function NameEntry({ onSubmit }) {
             style={inputStyle}
           />
           <span style={{ fontSize: '0.7rem', color: '#b07090', paddingLeft: '8px', fontStyle: 'italic' }}>
-            She'll send her confirmation here 💕
+            They'll send their confirmation here 💕
           </span>
         </div>
 

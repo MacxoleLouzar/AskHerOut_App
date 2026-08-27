@@ -55,7 +55,7 @@ export default function ShareLink({ senderName, recipientName, phone }) {
           Send it to {recipientName} 💕
         </h1>
         <p style={{ fontFamily: 'Lato, sans-serif', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: '#b07090', margin: 0, fontStyle: 'italic' }}>
-          She opens the link, picks the date details & you get notified on WhatsApp
+          They open the link, pick the date details & you get notified on WhatsApp
         </p>
       </div>
 
@@ -137,7 +137,7 @@ export default function ShareLink({ senderName, recipientName, phone }) {
       </div>
 
       <p style={{ fontFamily: 'Lato, sans-serif', fontSize: '0.78rem', color: '#b07090', margin: 0, fontStyle: 'italic' }}>
-        When she confirms the date, you'll receive a WhatsApp message 💕
+        When they confirm the date, you'll receive a WhatsApp message 💕
       </p>
     </div>
   );

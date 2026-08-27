@@ -45,7 +45,7 @@ export default function ShareLinkScreen({ senderName, recipientName, phone }) {
         </View>
 
         <Text style={styles.heading}>Send it to {recipientName} 💕</Text>
-        <Text style={styles.sub}>She opens the link, picks the date & you get notified on WhatsApp</Text>
+        <Text style={styles.sub}>They open the link, pick the date & you get notified on WhatsApp</Text>
 
         {/* Link preview */}
         <TouchableOpacity style={styles.linkBox} onPress={copyLink} activeOpacity={0.7}>
@@ -68,7 +68,7 @@ export default function ShareLinkScreen({ senderName, recipientName, phone }) {
           <Text style={styles.smsBtnText}>📤  Share Link</Text>
         </TouchableOpacity>
 
-        <Text style={styles.footer}>When she confirms the date, you'll receive a WhatsApp message 💕</Text>
+        <Text style={styles.footer}>When they confirm the date, you'll receive a WhatsApp message 💕</Text>
 
       </ScrollView>
     </Background>
